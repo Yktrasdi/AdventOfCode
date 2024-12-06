@@ -1,9 +1,17 @@
-f=open("../input.txt","r")
-print(f.read())
+f=open("input.txt","r")
+print(type(f))
 
-list1=[3,4,2,1,3,3]
-list2=[4,3,5,3,9,3]
+list1=[]
+list2=[]
 results=[]
+for x in range(1000):
+    tmp=f.readline()
+    tmp=str(tmp)
+    tmp=tmp.split("   ")
+    list1.append(int(tmp[0]))
+    list2.append(int(tmp[1]))
+    #print("svv",tmp)
+    #print("\nasohi",list1[x]," ",list2[x])
 
 tmp=0
 for z in range(len(list1)):
@@ -16,7 +24,7 @@ for z in range(len(list1)):
         #print("x:",x)
     for y in list2:
         if(y<numMin2):
-            numMin2=y;
+            numMin2=y
         #print("y:",y)
     
     list1.remove(numMin1)
@@ -35,5 +43,7 @@ for z in range(len(list1)):
 
 #print("nummin1:",numMin1,"nummin2:",numMin2)
 
-for x in results:
-    print("res:",x)
+#for x in results:
+    #print("res:",x)
+sum=sum(results)
+print(sum)
