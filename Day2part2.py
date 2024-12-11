@@ -1,27 +1,31 @@
-import numpy as np
 f=open("input.txt","r")
 numSafe=0
 posElim=0
+intLineA=[]
 for line in f:
+    posElim=0
     flag=0
+    line=line.replace("\n","")
     lineA=line.split(" ")
-    npLineA=np.array(lineA,int)
-    for z in lineA:
-        lineA.remove(z)
-        print ("z:",z)
-        if(npLineA[0]>npLineA[1]):
-            for x in range(len(npLineA)-1):
-                print("x: ",npLineA[x],"x+1: ",npLineA[x+1],"diff: ",(npLineA[x]-npLineA[x+1]),"pos: ",x)
+    intLineA.clear()
+    for x in lineA:
+        intLineA.append(int(x))
+    
+    for i in range(len(intLineA)):
+        val=intLineA[i]
+        intLineA.pop(posElim)
+        
+        if(intLineA[0]>intLineA[1]):
+            for x in range(len(intLineA)-1):
 
-                if(npLineA[x]-npLineA[x+1]>=1 and npLineA[x]-npLineA[x+1]<=3):
+                if(intLineA[x]-intLineA[x+1]>=1 and intLineA[x]-intLineA[x+1]<=3):
                     flag=1
                 else:
                     flag=0
                     break
-        elif(npLineA[0]<npLineA[1]):
-            for x in range(len(npLineA)-1):
-                print("x+1: ",npLineA[x+1],"x: ",npLineA[x],"diff: ",(npLineA[x+1]-npLineA[x]),"pos: ",x)
-                if(npLineA[x+1]-npLineA[x]>=1 and npLineA[x+1]-npLineA[x]<=3):
+        elif(intLineA[0]<intLineA[1]):
+            for x in range(len(intLineA)-1):
+                if(intLineA[x+1]-intLineA[x]>=1 and intLineA[x+1]-intLineA[x]<=3):
                     flag=1
                 else:
                     flag=0
@@ -30,6 +34,9 @@ for line in f:
         if flag==1:
             numSafe+=1
             break
-        npLineA[posElim]=z
+        else:
+            intLineA.insert(posElim,val)
+        
         posElim+=1
+
 print(numSafe)
